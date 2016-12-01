@@ -1,0 +1,22 @@
+{
+  "name": "cybertattoo-meanings-page-editor",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "4.6.0",
+    "npm": "2.15.9"
+  },
+  "scripts": {
+    "build-meanings-page": "node $NODE_DEBUG_OPTION ./build"
+  },
+  "keywords": [],
+  "author": "Stav Geffen (https://stav.io/)",
+  "license": "ISC",
+  "devDependencies": {
+    "espower-loader": "1.2.0",
+    "lodash": "4.17.2",
+    "mustache": "2.3.0",
+    "power-assert": "1.4.2"
+  }
+}
