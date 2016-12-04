@@ -57,12 +57,12 @@ gulp.task('html', () => {
 
 		css: [
 			'tachyons.min.css',
-			isProduction ? version + '.min.css' : 'styles.css'
+			isProduction ? version + '.css' : 'styles.css'
 		],
 
 		js: [
 			'zepto.js',
-			isProduction ? version + '.min.js' : 'scripts.js'
+			isProduction ? version + '.js' : 'scripts.js'
 		]
 
 	};
