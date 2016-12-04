@@ -23,8 +23,8 @@ function renderCategories(){
 	function categoryItemElem(item){
 
 		return `<li class="mv2">
-	<details class="outline-0">
-		<summary class="pointer">${item.title}</summary>
+	<details>
+		<summary class="outline-0 pointer">${item.title}</summary>
 		${itemContentElem(item.content)}
 	</details>
 </li>`
