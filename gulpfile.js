@@ -46,7 +46,6 @@ gulp.task('javascript', () => {
 
 	return gulp.src('client/index.js')
 		.pipe(plugins.browserify({ transform: ['babelify'] }))
-		.pipe(plugins.if(isProduction, plugins.uglify()))
 		.pipe(plugins.rename({ basename: isProduction ? version : 'scripts' }))
 		.pipe(gulp.dest('public'));
 
