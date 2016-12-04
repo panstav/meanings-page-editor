@@ -1,3 +1,0 @@
---reporter list
---timeout 60000
---require test/enable-power-assert.js
