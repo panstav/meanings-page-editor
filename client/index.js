@@ -22,13 +22,18 @@ function renderCategories(){
 
 	function categoryItemElem(item){
 
-		return `<li class="mv2">
+		return `<li class="mv3">
 	<details>
 		<summary class="f3 outline-0 pointer">${item.title}</summary>
 		${itemContentElem(item.content)}
+		${item.images.map(itemImageElem).join('')}
 	</details>
 </li>`
 
+	}
+
+	function itemImageElem(src){
+		return `<a rel="fancybox" href="${src}" style="background-image: url(${src});" class="w4 h4 cover bg-center dib ma2 fancybox"></a>`;
 	}
 
 	function itemContentElem(content){
