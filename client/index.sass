@@ -12,7 +12,42 @@ summary
 		color: #67ddf7
 
 section
+	header
+		min-height: 4rem
 	h2
 		background: linear-gradient(to top, hsla(191, 4%, 16%, 1) 10%, transparent 85%)
 	img
 		margin-top: -10px
+
+#modal-backdrop
+	display: none
+	z-index: 1000
+	position: fixed
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+	background-color: rgba(0, 0, 0, .7)
+#modal-container
+	position: absolute
+	top: 0
+	right: 0
+	bottom: 0
+	left: 0
+	margin: auto
+	max-width: 35rem
+	width: 90%
+	height: 90vh
+	background-color: white
+	border: 2px solid gray
+	border-radius: 5px
+	padding: 1rem
+	text-shadow: none
+
+footer
+	position: fixed
+	bottom: 0
+	right: 0
+	left: 0
+	display: none
+	background-color: white

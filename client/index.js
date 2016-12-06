@@ -1,51 +1,60 @@
-const categories = require('./data');
+const createStore = require('redux').createStore;
 
+const initialState = {
+	categories: require('./data'),
+	dataChanged: false
+};
+const reducers = require('./reducers');
+
+const store = createStore(reducers, initialState);
+window.dispatch = store.dispatch;
+window.subscribe = store.subscribe;
+window.getState = store.getState;
+
+const renderCategories = require('./lib/render-categories');
+const modal = require('./lib/modal');
+
+let container;
 $(() => {
-	$('#page-output').html(renderCategories());
+	$.fn.findData = findData;
+	container = $('#page-output');
+	container.html(renderCategories());
+	modal.init($('#modal-container'), $('#modal-backdrop'));
+	handleCategoryEditing();
+	subscribePageRender();
 });
 
-function renderCategories(){
+function handleCategoryEditing(){
 
-	return categories.map(categoryElem).join('');
+	container.on('click', 'header button', ev => {
 
-	function categoryElem(category){
+		const titleOfChosenCategory = $(ev.target).findData('category');
 
-		return `<section id="cat-${category.namespace}" class="mt5">
-	<header class="relative overflow-hidden">
-		<img src="https://loremflickr.com/g/640/240/${category.namespace}.jpg" class="w-100">
-		<h2 class="absolute f2 pr4 pv3 ma0 bottom-0 right-0 left-0 light-gray">${category.title}</h2>
-	</header>
-	<ul class="list pa0">${category.items.map(categoryItemElem).join('')}</ul>
-</section>`;
+		const {title,image} = getState().categories.find(category => {
+			return category.title === titleOfChosenCategory;
+		});
 
-	}
+		modal.open('category', {title,image});
 
-	function categoryItemElem(item){
+	});
 
-		return `<li class="mv3">
-	<details>
-		<summary class="f3 outline-0 pointer">${item.title}</summary>
-		${itemContentElem(item.content)}
-		${item.images.map(itemImageElem).join('')}
-	</details>
-</li>`
+}
 
-	}
+function subscribePageRender(){
 
-	function itemImageElem(src){
-		return `<a rel="fancybox" href="${src}" style="background-image: url(${src});" class="w4 h4 cover bg-center dib ma2 fancybox"></a>`;
-	}
+	subscribe(() => {
+		container.html(renderCategories());
+		if (getState().dataChanged) $('footer').show();
+	});
 
-	function itemContentElem(content){
-		
-		return typeof(content) === 'string'
-			? wrapParagraph(content)
-			: content.map(wrapParagraph).join('');
+}
 
-		function wrapParagraph(contentItem){
-			return `<p class="mr2">${contentItem}</p>`;
-		}
-		
-	}
+function findData(dataProperty){
+	const dataArray = [];
 
+	this.each(function(){
+		dataArray.push($(this).parents(`[data-${dataProperty}]`).data(dataProperty));
+	});
+
+	return dataArray.length === 1 ? dataArray[0] : dataArray;
 }

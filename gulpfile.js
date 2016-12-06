@@ -45,7 +45,8 @@ gulp.task('css', () => {
 gulp.task('javascript', () => {
 
 	return gulp.src('client/index.js')
-		.pipe(plugins.browserify({ transform: ['babelify'] }))
+		.pipe(plugins.browserify())
+		.pipe(plugins.babel({ presets: ['es2015'] }))
 		.pipe(plugins.rename({ basename: isProduction ? version : 'scripts' }))
 		.pipe(gulp.dest('public'));
 

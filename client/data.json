@@ -1,8 +1,8 @@
 [
   {
     "title": "חיות",
-    "namespace": "animals",
-    "items": [
+    "image": "http://placekitten.com/g/640/240",
+      "items": [
 
       {
         "title": "שפירית",
@@ -71,7 +71,7 @@
     ]
   },{
     "title": "חפצים",
-    "namespace": "objects",
+    "image": "http://placekitten.com/g/640/240",
     "items": [
 
       {
@@ -103,7 +103,7 @@
     ]
   },{
     "title": "טבע",
-    "namespace": "nature",
+    "image": "http://placekitten.com/g/640/240",
     "items": [
 
       {
@@ -131,7 +131,7 @@
     ]
   },{
     "title": "יפני",
-    "namespace": "japanese",
+    "image": "http://placekitten.com/g/640/240",
     "items": [
 
       {
@@ -174,7 +174,7 @@
     ]
   },{
     "title": "מיתולוגיה",
-    "namespace": "mythology",
+    "image": "http://placekitten.com/g/640/240",
     "items": [
 
       {
@@ -214,7 +214,7 @@
     ]
   },{
     "title": "רוחניות",
-    "namespace": "spirituality",
+    "image": "http://placekitten.com/g/640/240",
     "items": [
 
       {
