@@ -37,6 +37,8 @@ function init(innerElem, outerElem){
 		$(ev.target).before(renderCategoryItemImage('', modalElem.find('[id^="item-image-"]').length));
 	});
 
+	modalElem.on('click', '[data-role="close"]', close);
+
 }
 
 function open(type, data){
@@ -67,7 +69,8 @@ function renderCategoryModal({ title, image }){
 		<label for="category-image" class="pointer">תמונת הקטגוריה:</label>
 		<input id="category-image" type="text" value="${image}" class="w-100 mv1" style="direction: ltr;">
 	</div>
-	<button data-role="save">שמור שינויים</button>
+	<button data-role="save" class="fl mr2">שמור שינויים</button>
+	<button data-role="close" class="fl">ביטול</button>
 </div>`
 
 }
@@ -86,7 +89,8 @@ function renderCategoryItemModal({ title, content, images }){
 	</div>
 	${images.map(renderCategoryItemImage).join('')}
 	<button data-role="add-image">הוסף תמונה</button>
-	<button data-role="save">שמור שינויים</button>
+	<button data-role="save" class="fl mr2">שמור שינויים</button>
+	<button data-role="close" class="fl">ביטול</button>
 </div>`
 
 }
