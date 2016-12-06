@@ -38,6 +38,23 @@ function handleCategoryEditing(){
 
 	});
 
+	container.on('click', 'summary button', ev => {
+
+		const buttonElem = $(ev.target);
+
+		const titleOfChosenCategory = buttonElem.findData('category');
+		const titleOfChosenCategoryItem = buttonElem.findData('item');
+
+		const itemData = getState().categories.find(category => {
+			return category.title === titleOfChosenCategory;
+		}).items.find(item => {
+			return item.title === titleOfChosenCategoryItem;
+		});
+
+		modal.open('item', itemData);
+
+	});
+
 }
 
 function subscribePageRender(){

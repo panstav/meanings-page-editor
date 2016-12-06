@@ -12,7 +12,7 @@ function renderCategories(finalRender){
 		<img src="${category.image}" class="w-100">
 		<h2 class="absolute f2 pr4 pv3 ma0 bottom-0 right-0 left-0 light-gray">
 			${category.title}
-			${renderCategoryEdit()}
+			${renderEditButton()}
 		</h2>
 	</header>
 	<ul class="list pa0">${category.items.map(renderCategoryItem).join('')}</ul>
@@ -20,20 +20,23 @@ function renderCategories(finalRender){
 
 	}
 
-	function renderCategoryEdit(){
+	function renderEditButton(){
 		if (finalRender) return '';
 		return `<button class="mr2 pa1 br1 bw0 f5 fw1 pointer">ערוך</button>`;
 	}
 
 	function renderCategoryItem(item){
 
-		return `<li class="mv3">
+		return `<li data-item="${item.title}" class="mv3">
 	<details>
-		<summary class="f3 outline-0 pointer">${item.title}</summary>
+		<summary class="f3 outline-0 pointer">
+			${item.title}
+			${renderEditButton()}
+		</summary>
 		${renderCategoryItemContent(item.content)}
 		${item.images.map(renderCategoryItemImage).join('')}
 	</details>
-</li>`
+</li>`;
 
 	}
 
