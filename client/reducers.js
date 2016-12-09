@@ -20,7 +20,7 @@ function editCategory(state, {previousTitle, title, image}) {
 		return $.extend(category, { title, image });
 	});
 
-	return $.extend({dataChanged:true}, state, {categories});
+	return $.extend({}, state, {categories, dataChanged: true});
 }
 
 function editItem(state, {previousTitle, title, content, images}) {
@@ -35,5 +35,5 @@ function editItem(state, {previousTitle, title, content, images}) {
 		return $.extend(category, {items});
 	});
 
-	return $.extend({dataChanged:true}, state, {categories});
+	return $.extend({}, state, {categories, dataChanged: true});
 }
