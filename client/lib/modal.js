@@ -10,13 +10,17 @@ function init(innerElem, outerElem){
 
 		const previousTitle = $(ev.target).findData('editing-title');
 
-		dispatch({ type: 'EDIT_CATEGORY', payload: {
-			previousTitle,
-			title: modalElem.find('#category-title').val(),
-			image: modalElem.find('#category-image').val()
-		}});
+		saveOrAddCategory();
 
 		close();
+
+		function saveOrAddCategory(){
+			const title = modalElem.find('#category-title').val();
+			const image = modalElem.find('#category-image').val();
+			if (!previousTitle) return dispatch({ type: 'ADD_CATEGORY', payload: { title, image, items: [] } });
+			dispatch({ type: 'EDIT_CATEGORY', payload: { previousTitle, title, image }});
+		}
+
 	});
 
 	modalElem.on('click', '[data-editing-type="item"] [data-role="save"]', ev => {
@@ -44,7 +48,7 @@ function init(innerElem, outerElem){
 function open(type, data){
 
 	const modalHTML = type === 'category'
-		? renderCategoryModal(data)
+		? renderCategoryModal(data || { title: '', image: '' })
 		: renderCategoryItemModal(data);
 
 	modalElem.html(modalHTML);
@@ -60,7 +64,7 @@ function close(){
 function renderCategoryModal({ title, image }){
 
 	return `<div data-editing-type="category" data-editing-title="${title}">
-	<h2 class="mb4">עריכת הקטגוריה: "${title}"</h2>
+	<h2 class="mb4">${title ? `עריכת הקטגוריה: "${title}"` : 'קטגוריה חדשה'}</h2>
 	<div class="mv3">
 		<label for="category-title" class="pointer">כותרת הקטגוריה:</label>
 		<input id="category-title" type="text" value="${title}" class="w-100 mv1">

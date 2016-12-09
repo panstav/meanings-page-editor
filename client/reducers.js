@@ -10,6 +10,9 @@ module.exports = (state, action) => {
 		case 'EDIT_ITEM':
 			return editItem(state, action.payload);
 
+		case 'ADD_CATEGORY':
+			return $.extend({}, state, {categories: [action.payload, ...state.categories]})
+
 	}
 
 	return state;

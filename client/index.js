@@ -58,6 +58,8 @@ function handleCategoryEditing(){
 
 	});
 
+	container.on('click', 'button[data-action="add-category"]', ev => modal.open('category'));
+
 }
 
 function handleSavingChanges(){

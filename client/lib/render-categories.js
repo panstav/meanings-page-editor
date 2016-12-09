@@ -3,7 +3,10 @@ module.exports = renderCategories;
 function renderCategories(finalRender){
 	const currentState = getState();
 
-	return currentState.categories.map(renderCategory).join('');
+	return `
+<button data-action="add-category" class="mt4 pa1 br1 bw0 f5 fw1 pointer">הוסף קטגוריה</button>
+${currentState.categories.map(renderCategory).join('')}
+`;
 
 	function renderCategory(category){
 
