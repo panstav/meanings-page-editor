@@ -87,7 +87,7 @@ function renderCategoryItemModal({ title, content, images }){
 		<label for="item-content" class="pointer">תוכן הפריט:</label>
 		<textarea id="item-content" class="h5 w-100 mv1">${parseContent(content)}</textarea>
 	</div>
-	${images.map(renderCategoryItemImage).join('')}
+	${images ? images.map(renderCategoryItemImage).join('') : ''}
 	<button data-role="add-image">הוסף תמונה</button>
 	<button data-role="save" class="fl mr2">שמור שינויים</button>
 	<button data-role="close" class="fl">ביטול</button>

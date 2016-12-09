@@ -2,6 +2,9 @@ module.exports = (state, action) => {
 
 	switch (action.type){
 
+		case 'LOAD_ASYNC_DATA':
+			return $.extend({}, state, {categories: action.payload});
+
 		case 'EDIT_CATEGORY':
 			return editCategory(state, action.payload);
 		case 'EDIT_ITEM':

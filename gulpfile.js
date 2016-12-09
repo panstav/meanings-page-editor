@@ -83,7 +83,7 @@ gulp.task('watch', () => {
 
 gulp.task('build-zepto', () => {
 
-	const cmd = `MODULES="${process.env.ZEPTO_MODULES || 'zepto event'}" cd node_modules/zepto && npm run dist && cp dist/zepto.js ../../client`;
+	const cmd = `MODULES="${process.env.ZEPTO_MODULES || 'zepto event ajax'}" cd node_modules/zepto && npm run dist && cp dist/zepto.js ../../client`;
 
 	return gulp.src('package.json', { read: false })
 		.pipe(plugins.shell([cmd]));

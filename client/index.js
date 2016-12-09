@@ -1,7 +1,7 @@
 const createStore = require('redux').createStore;
 
 const initialState = {
-	categories: require('./data'),
+	categories: [],
 	dataChanged: false
 };
 const reducers = require('./reducers');
@@ -14,14 +14,17 @@ window.getState = store.getState;
 const renderCategories = require('./lib/render-categories');
 const modal = require('./lib/modal');
 
+const dbApikey = '?apikey=584a86ded386005e6393742b';
+
 let container;
 $(() => {
 	$.fn.findData = findData;
 	container = $('#page-output');
-	container.html(renderCategories());
 	modal.init($('#modal-container'), $('#modal-backdrop'));
 	handleCategoryEditing();
+	handleSavingChanges();
 	subscribePageRender();
+	getSavedDataFromRestDB();
 });
 
 function handleCategoryEditing(){
@@ -57,6 +60,30 @@ function handleCategoryEditing(){
 
 }
 
+function handleSavingChanges(){
+
+	$('footer button').on('click', ev => {
+
+		const date = new Date();
+		const data = {
+			createdAt: date.getTime(),
+			categories: getState().categories
+		};
+
+		$.ajax({ data, type: 'POST', url: 'https://stavio-3f07.restdb.io/rest/cybertattoo/584a924c62fb0d7d00000005' + dbApikey,
+			success: () => {
+				$('footer').hide();
+			},
+			error: err => {
+				console.error(err);
+				console.error(err.stack);
+			}
+		});
+
+	});
+
+}
+
 function subscribePageRender(){
 
 	subscribe(() => {
@@ -74,4 +101,23 @@ function findData(dataProperty){
 	});
 
 	return dataArray.length === 1 ? dataArray[0] : dataArray;
+}
+
+function getSavedDataFromRestDB(){
+
+	$.ajax({ url: 'https://stavio-3f07.restdb.io/rest/cybertattoo' + dbApikey, success, error: err => {
+		console.error(err);
+		console.error(err.stack);
+	} });
+
+	function success(data){
+
+		const sortedDocs = data.sort((a,b) => a.createdAt > b.createdAt ? -1 : 1);
+		sortedDocs.slice(10).forEach(oldDoc => {
+			$.ajax({ type: 'DELETE', url: `https://stavio-3f07.restdb.io/rest/cybertattoo/${oldDoc._id}${dbApikey}` });
+		});
+
+		dispatch({ type: 'LOAD_ASYNC_DATA', payload: sortedDocs[0].categories });
+	}
+
 }

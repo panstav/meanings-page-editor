@@ -34,7 +34,7 @@ function renderCategories(finalRender){
 			${renderEditButton()}
 		</summary>
 		${renderCategoryItemContent(item.content)}
-		${item.images.map(renderCategoryItemImage).join('')}
+		${item.images ? item.images.map(renderCategoryItemImage).join('') : ''}
 	</details>
 </li>`;
 
