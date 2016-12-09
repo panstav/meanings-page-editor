@@ -18,6 +18,7 @@ ${currentState.categories.map(renderCategory).join('')}
 			${renderEditButton()}
 		</h2>
 	</header>
+	<button data-action="add-item" data-add-to-category="${category.title}" class="mt3 mb2 pa1 br1 bw0 f5 fw1 pointer">הוסף פריט לקטגוריה</button>
 	<ul class="list pa0">${category.items.map(renderCategoryItem).join('')}</ul>
 </section>`;
 

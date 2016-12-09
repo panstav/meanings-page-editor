@@ -11,7 +11,9 @@ module.exports = (state, action) => {
 			return editItem(state, action.payload);
 
 		case 'ADD_CATEGORY':
-			return $.extend({}, state, {categories: [action.payload, ...state.categories]})
+			return $.extend({}, state, {categories: [action.payload, ...state.categories]});
+		case 'ADD_ITEM':
+			return addItem(state, action.payload);
 
 	}
 
@@ -39,6 +41,17 @@ function editItem(state, {previousTitle, title, content, images}) {
 		});
 
 		return $.extend(category, {items});
+	});
+
+	return $.extend({}, state, {categories, dataChanged: true});
+}
+
+function addItem(state, {title, content, images, categoryTitle}){
+
+	const categories = state.categories.map(category => {
+		if (category.title !== categoryTitle) return category;
+		category.items.push({title, content, images});
+		return category;
 	});
 
 	return $.extend({}, state, {categories, dataChanged: true});

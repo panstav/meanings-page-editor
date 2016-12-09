@@ -7,34 +7,39 @@ function init(innerElem, outerElem){
 	backdropElem = outerElem;
 
 	modalElem.on('click', '[data-editing-type="category"] [data-role="save"]', ev => {
-
-		const previousTitle = $(ev.target).findData('editing-title');
-
 		saveOrAddCategory();
-
 		close();
 
 		function saveOrAddCategory(){
+
+			const previousTitle = $(ev.target).findData('editing-title');
 			const title = modalElem.find('#category-title').val();
 			const image = modalElem.find('#category-image').val();
+
 			if (!previousTitle) return dispatch({ type: 'ADD_CATEGORY', payload: { title, image, items: [] } });
 			dispatch({ type: 'EDIT_CATEGORY', payload: { previousTitle, title, image }});
+
 		}
 
 	});
 
 	modalElem.on('click', '[data-editing-type="item"] [data-role="save"]', ev => {
-
-		const previousTitle = $(ev.target).findData('editing-title');
-
-		dispatch({ type: 'EDIT_ITEM', payload: {
-			previousTitle,
-			title: modalElem.find('#item-title').val(),
-			content: modalElem.find('#item-content').val().split('\n').filter(para => !!para),
-			images: modalElem.find('[id^="item-image-"]').map(function(){ return $(this).val(); }).get()
-		}});
-
+		saveOrAddItem();
 		close();
+
+		function saveOrAddItem(){
+
+			const previousTitle = $(ev.target).findData('editing-title');
+			const categoryTitle = $(ev.target).findData('item-of-category');
+			const title = modalElem.find('#item-title').val();
+			const content = modalElem.find('#item-content').val().split('\n').filter(para => !!para);
+			const images = modalElem.find('[id^="item-image-"]').map(function(){ return $(this).val(); }).get();
+
+			if (!previousTitle) return dispatch({ type: 'ADD_ITEM', payload: { title, content, images, categoryTitle }});
+			dispatch({ type: 'EDIT_ITEM', payload: { previousTitle, title, content, images }});
+
+		}
+
 	});
 
 	modalElem.on('click', '[data-editing-type="item"] [data-role="add-image"]', ev => {
@@ -45,11 +50,11 @@ function init(innerElem, outerElem){
 
 }
 
-function open(type, data){
+function open(type, data, categoryTitle){
 
 	const modalHTML = type === 'category'
 		? renderCategoryModal(data || { title: '', image: '' })
-		: renderCategoryItemModal(data);
+		: renderCategoryItemModal(data || { title: '', content: '', images: [], categoryTitle });
 
 	modalElem.html(modalHTML);
 
@@ -79,10 +84,10 @@ function renderCategoryModal({ title, image }){
 
 }
 
-function renderCategoryItemModal({ title, content, images }){
+function renderCategoryItemModal({ title, content, images, categoryTitle }){
 
-	return `<div data-editing-type="item" data-editing-title="${title}">
-	<h2 class="mb4">עריכת הפריט: "${title}"</h2>
+	return `<div data-editing-type="item" data-editing-title="${title}" data-item-of-category="${categoryTitle}">
+	<h2 class="mb4">${title ? `עריכת הפריט: "${title}"` : 'פריט חדש'}</h2>
 	<div class="mv3">
 		<label for="item-title" class="pointer">כותרת הפריט:</label>
 		<input id="item-title" type="text" value="${title}" class="w-100 mv1">

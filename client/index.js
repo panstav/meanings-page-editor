@@ -60,6 +60,11 @@ function handleCategoryEditing(){
 
 	container.on('click', 'button[data-action="add-category"]', ev => modal.open('category'));
 
+	container.on('click', 'button[data-action="add-item"]', ev => {
+		const categoryTitle = $(ev.target).data('add-to-category');
+		modal.open('item', null, categoryTitle);
+	});
+
 }
 
 function handleSavingChanges(){
