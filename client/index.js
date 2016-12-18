@@ -1,4 +1,5 @@
 const createStore = require('redux').createStore;
+const asyncSeries = require('async/series');
 
 const initialState = {
 	categories: [],
@@ -120,11 +121,27 @@ function getSavedDataFromRestDB(){
 	function success(data){
 
 		const sortedDocs = data.sort((a,b) => a.createdAt > b.createdAt ? -1 : 1);
-		sortedDocs.slice(10).forEach(oldDoc => {
-			$.ajax({ type: 'DELETE', url: `https://stavio-3f07.restdb.io/rest/cybertattoo/${oldDoc._id}${dbApikey}` });
-		});
 
 		dispatch({ type: 'LOAD_ASYNC_DATA', payload: sortedDocs[0].categories });
+
+		asyncSeries(sortedDocs.slice(10).map(delayAndDelete), (err, results) => {
+			if (err) {
+				console.error(err);
+				console.error(err.stack);
+			}
+		});
+
+		function delayAndDelete(oldDoc){
+			return done => {
+
+				setTimeout(() => {
+					$.ajax({ type: 'DELETE', url: `https://stavio-3f07.restdb.io/rest/cybertattoo/${oldDoc._id}${dbApikey}`, complete: () => done() });
+				}, 2500);
+
+			};
+		}
+
+
 	}
 
 }
