@@ -1,14 +1,56 @@
 section[data-category]
-	header
-		min-height: 4rem
-	h2
-		background: linear-gradient(to top, hsla(191, 4%, 16%, 1) 10%, transparent 85%)
-	img
-		margin-top: -10px
+	margin-top: 4rem
 
-	summary
-		&::-webkit-details-marker
-			color: #67ddf7
+	header
+		position: relative
+		overflow: hidden
+		min-height: 4rem
+
+		h2
+			position: absolute
+			left: 0
+			right: 0
+			bottom: 0
+			font-size: 2.25rem
+			margin: 0
+			padding-top: 1rem
+			padding-bottom: 1rem
+			padding-right: 2rem
+			color: #eee
+			background: linear-gradient(to top, hsla(191, 4%, 16%, 1) 10%, transparent 85%)
+		img
+			width: 100%
+			margin-top: -10px
+
+	ul
+		list-style-type: none
+		padding: 0
+
+	li
+		margin-top: 1rem
+		margin-bottom: 1rem
+
+	[data-item]
+
+		summary
+			&::-webkit-details-marker
+				color: #67ddf7
+			outline: 0
+			font-size: 1.5rem
+			cursor: pointer
+
+		p
+			margin-right: .5rem
+
+		a
+			display: inline-block
+			background-repeat: no-repeat
+			background-position: 50%
+			background-size: cover
+			margin: .5rem
+			width: 8rem
+			height: 8rem
+
 
 #modal-backdrop
 	display: none

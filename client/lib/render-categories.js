@@ -12,14 +12,14 @@ ${currentState.categories.map(renderCategory).join('')}
 
 		return `<section data-category="${category.title}" class="mt5">
 	<header class="relative overflow-hidden">
-		<img src="${category.image}" class="w-100">
-		<h2 class="absolute f2 pr4 pv3 ma0 bottom-0 right-0 left-0 light-gray">
+		<img src="${category.image}">
+		<h2>
 			${category.title}
 			${renderEditButton()}
 		</h2>
 	</header>
 	<button data-action="add-item" data-add-to-category="${category.title}" class="mt3 mb2 pa1 br1 bw0 f5 fw1 pointer">הוסף פריט לקטגוריה</button>
-	<ul class="list pa0">${category.items.map(renderCategoryItem).join('')}</ul>
+	<ul>${category.items.map(renderCategoryItem).join('')}</ul>
 </section>`;
 
 	}
@@ -31,9 +31,9 @@ ${currentState.categories.map(renderCategory).join('')}
 
 	function renderCategoryItem(item){
 
-		return `<li data-item="${item.title}" class="mv3">
+		return `<li data-item="${item.title}">
 	<details>
-		<summary class="f3 outline-0 pointer">
+		<summary>
 			${item.title}
 			${renderEditButton()}
 		</summary>
@@ -45,7 +45,7 @@ ${currentState.categories.map(renderCategory).join('')}
 	}
 
 	function renderCategoryItemImage(src){
-		return `<a rel="fancybox" href="${src}" style="background-image: url(${src});" class="w4 h4 cover bg-center dib ma2 fancybox"></a>`;
+		return `<a rel="fancybox" href="${src}" style="background-image: url(${src});" class="fancybox"></a>`;
 	}
 
 	function renderCategoryItemContent(content){
@@ -55,7 +55,7 @@ ${currentState.categories.map(renderCategory).join('')}
 			: content.map(wrapParagraph).join('');
 
 		function wrapParagraph(contentItem){
-			return `<p class="mr2">${contentItem}</p>`;
+			return `<p>${contentItem}</p>`;
 		}
 
 	}
