@@ -43,7 +43,7 @@ ${currentState.categories.map(renderCategory).join('')}
 			${renderEditButton()}
 		</summary>
 		${renderCategoryItemContent(item.content)}
-		${item.images ? item.images.map(renderCategoryItemImage).join('') : ''}
+		${renderCategoryItemImages(item)}
 	</details>
 </li>`;
 
@@ -54,8 +54,13 @@ ${currentState.categories.map(renderCategory).join('')}
 		return `<button class="mr2 pa1 br1 bw0 f5 fw1 pointer">ערוך</button>`;
 	}
 
-	function renderCategoryItemImage(src){
-		return `<a rel="fancybox" href="${src}" style="background-image: url(${src});" class="fancybox"></a>`;
+	function renderCategoryItemImages(item){
+		if (!item.images) return '';
+
+		return item.images.map(src => {
+			return `<a rel="${item.title}" href="${src}" style="background-image: url(${src});" class="fancybox"></a>`;
+		}).join('');
+
 	}
 
 	function renderCategoryItemContent(content){
