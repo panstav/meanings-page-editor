@@ -28,7 +28,17 @@ gulp.task('static', () => {
 
 });
 
-gulp.task('css', () => {
+gulp.task('output-css', () => {
+
+	return gulp.src('client/sass/meanings-page.sass')
+		.pipe(plugins.sass({ outputStyle: 'compressed' }))
+		.pipe(plugins.autoprefixer({ browsers: ['> 1%', 'ie > 8'] }))
+		.pipe(plugins.rename({ basename: 'meanings-page-styles' }))
+		.pipe(gulp.dest('public'));
+
+});
+
+gulp.task('css', ['output-css'], () => {
 
 	const sassOptions = isProduction
 		? { outputStyle: 'compressed' }

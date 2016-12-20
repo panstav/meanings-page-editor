@@ -4,9 +4,14 @@ function renderCategories(finalRender){
 	const currentState = getState();
 
 	return `
-<button data-action="add-category" class="mt4 pa1 br1 bw0 f5 fw1 pointer">הוסף קטגוריה</button>
+${renderAddCategoryButton()}
 ${currentState.categories.map(renderCategory).join('')}
 `;
+
+	function renderAddCategoryButton(){
+		if (finalRender) return '';
+		return `<button data-action="add-category" class="mt4 pa1 br1 bw0 f5 fw1 pointer">הוסף קטגוריה</button>`;
+	}
 
 	function renderCategory(category){
 
@@ -18,15 +23,15 @@ ${currentState.categories.map(renderCategory).join('')}
 			${renderEditButton()}
 		</h2>
 	</header>
-	<button data-action="add-item" data-add-to-category="${category.title}" class="mt3 mb2 pa1 br1 bw0 f5 fw1 pointer">הוסף פריט לקטגוריה</button>
+	${renderAddItemButton(category.title)}
 	<ul>${category.items.map(renderCategoryItem).join('')}</ul>
 </section>`;
 
 	}
 
-	function renderEditButton(){
+	function renderAddItemButton(title){
 		if (finalRender) return '';
-		return `<button class="mr2 pa1 br1 bw0 f5 fw1 pointer">ערוך</button>`;
+		return `<button data-action="add-item" data-add-to-category="${title}" class="mt3 mb2 pa1 br1 bw0 f5 fw1 pointer">הוסף פריט לקטגוריה</button>`;
 	}
 
 	function renderCategoryItem(item){
@@ -42,6 +47,11 @@ ${currentState.categories.map(renderCategory).join('')}
 	</details>
 </li>`;
 
+	}
+
+	function renderEditButton(){
+		if (finalRender) return '';
+		return `<button class="mr2 pa1 br1 bw0 f5 fw1 pointer">ערוך</button>`;
 	}
 
 	function renderCategoryItemImage(src){

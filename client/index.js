@@ -26,6 +26,7 @@ $(() => {
 	handleSavingChanges();
 	subscribePageRender();
 	getSavedDataFromRestDB();
+	window.render = () => copy(renderCategories(true));
 });
 
 function handleCategoryEditing(){
