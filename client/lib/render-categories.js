@@ -58,8 +58,14 @@ ${currentState.categories.map(renderCategory).join('')}
 		if (!item.images) return '';
 
 		return item.images.map(src => {
-			return `<a rel="${item.title}" href="${src}" style="background-image: url(${src});" class="fancybox"></a>`;
+			return `<a rel="${escapedItemTitle()}" href="${src}" style="background-image: url(${src});" class="fancybox"></a>`;
 		}).join('');
+
+		function escapedItemTitle(){
+			// dash cased string is safer for fancybox
+			// which in production show images with the same rel - as a gallery
+			return item.title.replace(/ /g, '-');
+		}
 
 	}
 
