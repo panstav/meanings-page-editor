@@ -1,57 +1,67 @@
 body.postid-71
 
-	section[data-category]
-		margin-top: 4rem
+	[data-role="category-header"]
+		cursor: pointer
+		position: relative
+		overflow: hidden
+		min-height: 4rem
+		&::-webkit-details-marker
+			display: none
 
-		header
-			position: relative
-			overflow: hidden
-			min-height: 4rem
+		p
+			display: none
+		h2
+			position: absolute
+			left: 0
+			right: 0
+			bottom: 0
+			font-size: 2rem
+			margin: 0
+			padding-top: 1rem
+			padding-bottom: 1.7rem
+			padding-right: 2rem
+			color: #eee
+			background: linear-gradient(to top, rgba(39, 42, 42, 0.8) 10%, transparent 85%)
+		img
+			width: 100%
+			margin-top: -10px
+
+	[data-category]
+		&:first-of-type
+			margin-top: 2rem
+		&[open] > summary
 			margin-bottom: 2rem
+		&:not([open])
+			margin-bottom: 1rem
 
-			p
-				display: none
-			h2
-				position: absolute
-				left: 0
-				right: 0
-				bottom: 0
-				font-size: 2rem
-				margin: 0
-				padding-top: 1rem
-				padding-bottom: 1.7rem
-				padding-right: 2rem
-				color: #eee
-				background: linear-gradient(to top, rgba(39, 42, 42, 0.8) 10%, transparent 85%)
-			img
-				width: 100%
-				margin-top: -10px
+		summary
+			outline: 0
 
 		ul
 			list-style-type: none
+			margin-bottom: 4rem
 			padding: 0
 
 		li
 			margin-top: 1rem
 			margin-bottom: 1rem
 
-		[data-item]
+	[data-item]
 
-			summary
-				&::-webkit-details-marker
-					color: #67ddf7
-				outline: 0
-				font-size: 1.5rem
-				cursor: pointer
+		summary
+			&::-webkit-details-marker
+				color: #67ddf7
+			font-size: 1.5rem
+			cursor: pointer
 
-			p
-				margin-right: .5rem
+		p
+			margin-right: .5rem
 
-			a
-				display: inline-block
-				background-repeat: no-repeat
-				background-position: 50%
-				background-size: cover
-				margin: .5rem
-				width: 8rem
-				height: 8rem
+		a
+			display: inline-block
+			background-repeat: no-repeat
+			background-position: 50%
+			background-size: cover
+			margin: .5rem
+			width: 8rem
+			height: 8rem

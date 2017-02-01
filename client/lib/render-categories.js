@@ -15,17 +15,17 @@ ${currentState.categories.map(renderCategory).join('')}
 
 	function renderCategory(category){
 
-		return `<section data-category="${category.title}" class="mt5">
-	<header class="relative overflow-hidden">
+		return `<details data-category="${category.title}" class="mt5">
+	<summary data-role="category-header" class="relative overflow-hidden">
 		<img src="${category.image}">
 		<h2>
 			${category.title}
 			${renderEditButton()}
 		</h2>
-	</header>
+	</summary>
 	${renderAddItemButton(category.title)}
 	<ul>${category.items.map(renderCategoryItem).join('')}</ul>
-</section>`;
+</details>`;
 
 	}
 
