@@ -67,10 +67,14 @@ body.postid-71
 			height: 8rem
 
 	[data-category] > summary
-		height: 150px
-		img
-			margin-top: calc(-35% + 150px)
+		height: 100px
 	[data-category="חפצים"] > summary img
-		margin-top: calc(-35% + 100px)
-	[data-category="מיתולוגיה"] > summary img
-		margin-top: calc(-35% + 180px)
+		margin-top: -50px
+
+	@media (min-width: 450px)
+		[data-category] > summary
+			height: 150px
+		[data-category] > summary img
+			margin-top: calc(-35% + 150px)
+		[data-category="מיתולוגיה"] > summary img
+			margin-top: calc(-35% + 152px)
