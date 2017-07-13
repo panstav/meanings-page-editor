@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "4.6.0",
-    "npm": "2.15.9"
+    "node": "4.8.4",
+    "npm": "2.15.11"
   },
   "scripts": {
     "postinstall": "node_modules/.bin/gulp build",
