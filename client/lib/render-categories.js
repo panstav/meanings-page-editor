@@ -1,3 +1,5 @@
+let usedConstentId = false;
+
 module.exports = renderCategories;
 
 function renderCategories(finalRender){
@@ -76,7 +78,13 @@ ${currentState.categories.map(renderCategory).join('')}
 			: content.map(wrapParagraph).join('');
 
 		function wrapParagraph(contentItem){
-			return `<p>${contentItem}</p>`;
+			return `<p id="${insertId()}">${contentItem}</p>`;
+		}
+
+		function insertId(){
+			if (usedConstentId) return `id${Math.round(Math.random()*1000)}`;
+			usedConstentId = true;
+			return 'test-id';
 		}
 
 	}
